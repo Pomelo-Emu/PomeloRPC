@@ -1,0 +1,33 @@
+{
+  "originHash" : "c096ceee3048a57f71776ff27c306a998f740e1ba75ce166e007afcd107343ec",
+  "pins" : [
+    {
+      "identity" : "bluesocket",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Kitura/BlueSocket.git",
+      "state" : {
+        "revision" : "7b23a867008e0027bfd6f4d398d44720707bc8ca",
+        "version" : "2.0.4"
+      }
+    },
+    {
+      "identity" : "flyingfox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swhitty/FlyingFox",
+      "state" : {
+        "revision" : "0482ba51ff2d6d91a7ea449c3dbdce2a78802b85",
+        "version" : "0.19.0"
+      }
+    },
+    {
+      "identity" : "swordrpc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PKBeam/SwordRPC.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "978393ef02aa15841db5e4ffd410539d1307a4fb"
+      }
+    }
+  ],
+  "version" : 3
+}
