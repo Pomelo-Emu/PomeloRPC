@@ -138,8 +138,7 @@ class DiscordRPCServer: ObservableObject {
             try await server.run()
         }
         // Connect to Discord
-        let connected = sword.connect()
-        if connected {
+        if isConnected {
             isConnected = true
             
             // Set initial empty presence
@@ -147,7 +146,7 @@ class DiscordRPCServer: ObservableObject {
             sword.setPresence(emptyPresence)
         }
         
-        return connected
+        return true
     }
     
     func stop() {
@@ -205,7 +204,11 @@ class DiscordRPCServer: ObservableObject {
         // Configure rich presence
         var rpc = RichPresence()
         rpc.details = "Playing: \(game.name) (\(game.id))"
-        rpc.timestamps.start = .now
+        if #available(macOS 12, *) {
+            rpc.timestamps.start = .now
+        } else {
+            rpc.timestamps.start = Date()
+        }
         rpc.state = game.developer
         rpc.assets.largeImage = "pomelo-icon"
         rpc.assets.largeText = "Pomelo Emulator"
@@ -213,6 +216,9 @@ class DiscordRPCServer: ObservableObject {
         sword.setPresence(rpc)
         
         // Start heartbeat monitoring
+        
+        isConnected = sword.connect()
+        
         updateHeartbeat()
         startHeartbeatMonitoring()
     }
@@ -269,6 +275,7 @@ class DiscordRPCServer: ObservableObject {
     private func handleDisconnection() async {
         resetPresence()
         currentGame = nil
+        self.stop()
     }
     
     private func stopHeartbeatMonitoring() {
